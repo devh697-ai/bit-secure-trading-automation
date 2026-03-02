@@ -1,0 +1,8 @@
+Entry Logic:
+Crossover ke ±1 candle marubozu
+
+Target: 80 points
+Stoploss: 40 points
+
+Exit:
+3 continuous opposite Heikin Ashi candles
