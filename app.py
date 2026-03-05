@@ -2,7 +2,7 @@ import os
 import requests
 from flask import Flask, request, jsonify
 
-app = Flask(__name__)   # 🔥 Ye line bahut important hai
+app = Flask(__name__)
 
 TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
 TELEGRAM_CHAT_ID = os.getenv("TELEGRAM_CHAT_ID")
@@ -17,13 +17,35 @@ def home():
 def webhook():
     data = request.json
 
-    message = f"""
-📢 SIGNAL ALERT
+    symbol = data.get("symbol")
+    side = data.get("side")
+    price = data.get("price")
+    timeframe = data.get("timeframe")
 
-Symbol: {data.get('symbol')}
-Side: {data.get('side')}
-Price: {data.get('price')}
-Timeframe: {data.get('timeframe')}
+    # Market detection
+    if symbol in ["BTCUSDT","ETHUSDT","SOLUSDT"]:
+        market = "CRYPTO"
+    elif symbol in ["NIFTY","BANKNIFTY","NIFTY50"]:
+        market = "INDEX"
+    else:
+        market = "MARKET"
+
+    # Professional Telegram message
+    message = f"""
+🚨 BIT SECURE TRADE SIGNAL
+
+📊 Symbol : {symbol}
+📈 Side : {side}
+💰 Entry : {price}
+⏱ Timeframe : {timeframe}
+
+⚡ Strategy : HMA + UT Bot
+🧠 Market : {market}
+
+━━━━━━━━━━━━━━
+
+⚠️ Trade at your own risk
+📡 Powered by Bit Secure Algo
 """
 
     url = f"https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}/sendMessage"
