@@ -39,7 +39,7 @@ def webhook():
 💰 Entry : {price}
 ⏱ Timeframe : {timeframe}
 
-⚡ Strategy : HMA + UT Bot
+⚡ Strategy : Bit secure Smart AI Engine
 🧠 Market : {market}
 
 ━━━━━━━━━━━━━━
